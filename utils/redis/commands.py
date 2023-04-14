@@ -1,8 +1,8 @@
 from redis.client import Redis
+from redis.typing import ChannelT
 
 from settings import DEFAULT_TIMEOUT_SECONDS
 from utils.commands import Command
-from utils.redis.channels import ListenRedisChannel, SendRedisChannel
 from utils.redis.exceptions import InvalidChannelSubscriberCount, InvalidReceiversCount
 from utils.redis.message import Message
 
@@ -12,7 +12,7 @@ EXPECTED_CHANNEL_SUBSCRIBER_COUNT = 1
 
 class SendRedisMessageCommand(Command):
     def __init__(
-            self, channel: SendRedisChannel, message: str, r: Redis, *args, **kwargs
+            self, channel: ChannelT, message: str, r: Redis, *args, **kwargs
     ):
         super().__init__(*args, **kwargs)
         self.__r = r
@@ -21,7 +21,7 @@ class SendRedisMessageCommand(Command):
 
     def execute(self) -> int:
         """returns receiver count"""
-        return self.__r.publish(self._channel.name, self.__message)
+        return self.__r.publish(self._channel, self.__message)
 
 
 class SendRedisMessageToOneReceiverCommand(SendRedisMessageCommand):
@@ -32,15 +32,15 @@ class SendRedisMessageToOneReceiverCommand(SendRedisMessageCommand):
 
     def __check_receiver_count_is_one(self, receiver_count: int):
         if receiver_count != EXPECTED_MESSAGE_RETRIEVER_COUNT:
-            raise InvalidReceiversCount(receiver_count, self._channel.name)
+            raise InvalidReceiversCount(receiver_count, self._channel)
 
 
 class GetRedisMessageCommand(Command):
 
-    def __init__(self, channel: ListenRedisChannel, r: Redis, *args, **kwargs):
+    def __init__(self, channel: ChannelT, r: Redis, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__channels = r.pubsub()
-        self.__subscribe_to_channel(channel.name)
+        self.__subscribe_to_channel(channel)
 
     def __subscribe_to_channel(self, channel_name: str):
         self.__channels.subscribe(channel_name)
