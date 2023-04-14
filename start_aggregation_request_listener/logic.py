@@ -1,0 +1,7 @@
+from start_aggregation_request_listener.commands import \
+    get_start_aggregation_request_message_from_redis
+from start_aggregation_request_listener.listener import StartAggregationRequestListener
+
+
+def create_redis_start_aggregation_request_listener() -> StartAggregationRequestListener:
+    return StartAggregationRequestListener(get_start_aggregation_request_message_from_redis)

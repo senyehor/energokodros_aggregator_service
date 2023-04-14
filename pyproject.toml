@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aggregation-controller"
+version = "0.1.0"
+description = ""
+authors = ["Yehor Sencha <senyehor@gmail.com>"]
+readme = "README.md"
+packages = [{include = "aggregation_controller"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+redis = "^4.5.1"
+python-dotenv = "^0.21.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

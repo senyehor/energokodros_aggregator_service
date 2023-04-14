@@ -1,0 +1,1 @@
+from .logic import create_redis_aggregator_controller
