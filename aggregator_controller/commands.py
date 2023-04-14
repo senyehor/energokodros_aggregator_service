@@ -5,13 +5,13 @@ from utils.redis.commands import GetRedisMessageCommand, SendRedisMessageToOneRe
 _ = AGGREGATOR_CONTROLLER_CONFIG
 
 start_aggregation = SendRedisMessageToOneReceiverCommand(
-    channel=_.channels.send_channel,
+    channel=_.channel_name,
     message=_.start_aggregation_message,
     r=REDIS,
     command_name='start_aggregation'
 )
 update_aggregator_state = SendRedisMessageToOneReceiverCommand(
-    channel=_.channels.send_channel,
+    channel=_.channel_name,
     message=_.update_state_message,
     r=REDIS,
     command_name='update_aggregator_state'
