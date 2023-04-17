@@ -30,7 +30,7 @@ class __StartAggregationRequestRedisCheckerCommand(Command):
 
 
 __get_start_aggregation_request_command = GetRedisMessageCommand(
-    _.listen_channel, REDIS, command_name='get_start_aggregation_command'
+    _.channel_name, REDIS, command_name='get_start_aggregation_command'
 )
 
 get_start_aggregation_request_message_from_redis = __StartAggregationRequestRedisCheckerCommand(
