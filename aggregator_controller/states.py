@@ -1,6 +1,6 @@
-from enum import StrEnum
+from utils.redis.state import StatesBase
 
 
-class AggregatorStates(StrEnum):
+class AggregatorStates(StatesBase):
     RUNNING = 'running'
     IDLE = 'idle'
