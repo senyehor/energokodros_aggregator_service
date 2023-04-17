@@ -15,10 +15,10 @@ class __StartAggregationRequestRedisCheckerCommand(StartAggregationRequestChecke
 
     def __init__(
             self, start_aggregation_request_message: str,
-            get_start_aggregation_command: Command, *args, **kwargs
+            get_start_aggregation_request_command: Command, *args, **kwargs
     ):
         super().__init__(*args, **kwargs)
-        self.__get_start_aggregation_request_command = get_start_aggregation_command
+        self.__get_start_aggregation_request_command = get_start_aggregation_request_command
         self.__start_aggregation_request_message = start_aggregation_request_message
 
     def execute(self, *args, **kwargs) -> bool:
