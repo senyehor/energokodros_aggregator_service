@@ -2,7 +2,7 @@ from enum import StrEnum
 from typing import Any, Callable
 
 from utils.commands import Command
-from utils.exceptions import InvalidRawState
+from utils.redis.exceptions import InvalidRawState
 
 StatesBase = StrEnum
 

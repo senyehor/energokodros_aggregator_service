@@ -17,3 +17,7 @@ class InvalidReceiversCount(LogicExceptionWithMessage):
 
 class InvalidChannelSubscriberCount(LogicException):
     pass
+
+
+class InvalidRawState(LogicException):
+    pass
