@@ -14,5 +14,6 @@ class InvalidChannelSubscriberCount(LogicException):
     pass
 
 
-class InvalidRawState(LogicException):
-    pass
+class InvalidRawState(LogicExceptionWithMessage):
+    def __init__(self, actual_state: str):
+        self.message = f'found state {actual_state}'
