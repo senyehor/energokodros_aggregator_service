@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 
 from aggregator_controller import create_redis_aggregator_controller
-from box_listening_suspender import create_redis_box_listener_suspender
+from box_listening_controller import create_redis_box_listener_controller
 from start_aggregation_request_listener import create_redis_start_aggregation_request_listener
 
 load_dotenv()
@@ -9,7 +9,7 @@ load_dotenv()
 
 def main():
     start_aggregation_request_listener = create_redis_start_aggregation_request_listener()
-    box_listening_suspender = create_redis_box_listener_suspender()
+    box_listening_suspender = create_redis_box_listener_controller()
     aggregator_controller = create_redis_aggregator_controller()
     while True:
         if start_aggregation_request_listener.check_start_aggregation_request_came():
