@@ -1,18 +1,25 @@
 import os
 from dataclasses import dataclass
 
-from utils.config_base import RedisChannelMixin
-
 
 @dataclass
-class __StartAggregationRequestListenerConfig(RedisChannelMixin):
+class __StartAggregationRequestListenerConfig:
     check_request_interval_seconds: int
     start_aggregation_request_message: str
+    aggregation_request_listen_channel: str
+    aggregation_start_result_send_channel: str
+    aggregation_started_or_completed_successfully_message: str
 
 
 START_AGGREGATION_REQUEST_LISTENER_CONFIG = __StartAggregationRequestListenerConfig(
-    channel_name=os.getenv(
-        'START_AGGREGATION_REQUEST_LISTENER_LISTEN_CHANNEL_NAME'
+    aggregation_request_listen_channel=os.getenv(
+        'START_AGGREGATION_REQUEST_LISTENER_LISTEN_CHANNEL'
+    ),
+    aggregation_start_result_send_channel=os.getenv(
+        'START_AGGREGATION_REQUEST_LISTENER_AGGREGATION_START_RESULT_SEND_CHANNEL'
+    ),
+    aggregation_started_or_completed_successfully_message=os.getenv(
+        'AGGREGATION_STARTED_OR_COMPLETED_SUCCESSFULLY_MESSAGE'
     ),
     start_aggregation_request_message=os.getenv(
         'START_AGGREGATION_REQUEST_LISTENER_START_AGGREGATION_MESSAGE'
