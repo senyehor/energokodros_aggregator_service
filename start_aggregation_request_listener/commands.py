@@ -1,6 +1,6 @@
 from settings import REDIS
 from utils.commands import Command
-from utils.redis.commands import GetRedisMessageCommand
+from utils.redis.commands import GetRedisMessageCommand, SendRedisMessageCommand
 from utils.redis.message import Message
 from .config import START_AGGREGATION_REQUEST_LISTENER_CONFIG as _
 from .exceptions import ReceivedMessageIsNotCorrectStartAggregationRequest
@@ -30,7 +30,9 @@ class __StartAggregationRequestRedisCheckerCommand(Command):
 
 
 __get_start_aggregation_request_command = GetRedisMessageCommand(
-    _.channel_name, REDIS, command_name='get_start_aggregation_request_command'
+    channel=_.aggregation_request_listen_channel,
+    r=REDIS,
+    command_name='get_start_aggregation_request_command'
 )
 
 get_start_aggregation_request_message_from_redis = __StartAggregationRequestRedisCheckerCommand(
