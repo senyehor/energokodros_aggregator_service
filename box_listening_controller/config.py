@@ -1,7 +1,11 @@
 import os
 from dataclasses import dataclass
+from datetime import timedelta
 
 from utils.config_base import RedisChannelMixin
+
+AGGREGATION_LAST_TIME_RUN_FORMAT = '%Y-%m-%dT%H:%M:%S.%f%z'
+TIMEDELTA_TO_CHECK_WHETHER_AGGREGATION_WAS_RUN_TOO_FAST = timedelta(seconds=5)
 
 
 @dataclass
