@@ -22,7 +22,6 @@ FROM dependencies-builder as runtime
 ENV DEPENDENCIES_DIR /dependencies
 ENV APP_DIR /app
 RUN mkdir $APP_DIR
-RUN mkdir $APP_DIR/staticfiles
 WORKDIR $APP_DIR
 # copying copliled libs to folder where python expects them to be
 COPY --from=dependencies-builder $DEPENDENCIES_DIR /usr/local
