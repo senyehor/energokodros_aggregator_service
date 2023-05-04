@@ -9,12 +9,9 @@ _ = AGGREGATOR_CONTROLLER_CONFIG
 start_aggregation = SendRedisMessageToOneReceiverCommand(
     channel=_.channel_name,
     message=_.start_aggregation_message,
-    r=REDIS,
-    command_name='start_aggregation'
+    r=REDIS
 )
-
 get_aggregator_state = GetRedisValue(
     value_key=_.aggregator_state_key,
-    r=REDIS,
-    command_name='get_aggregator_state'
+    r=REDIS
 )

@@ -31,12 +31,10 @@ class __StartAggregationRequestRedisCheckerCommand(Command):
 
 __get_start_aggregation_request_command = GetRedisMessageCommand(
     channel=_.aggregation_request_listen_channel,
-    r=REDIS,
-    command_name='get_start_aggregation_request_command'
+    r=REDIS
 )
 
 get_start_aggregation_request_message_from_redis = __StartAggregationRequestRedisCheckerCommand(
     start_aggregation_request_message=_.start_aggregation_request_message,
-    get_start_aggregation_request_command=__get_start_aggregation_request_command,
-    command_name='get_start_aggregation_request_message_from_redis',
+    get_start_aggregation_request_command=__get_start_aggregation_request_command
 )
