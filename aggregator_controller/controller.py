@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-from time import sleep
 
 from aggregator_controller.exceptions import (
     AggregationAlreadyRunning,
@@ -12,9 +11,10 @@ from box_listening_controller.config import (
 )
 from utils.commands import Command
 from utils.redis.state import StateReceiver
+from utils.utils import wait_until_func_true
 from .aggregation_start_results import AggregationStartResults
 from .config import (
-    AGGREGATION_FINISHED_CHECK_INTERVAL_SECONDS, MAX_AGGREGATION_TIME,
+    MAX_AGGREGATION_TIME,
     TIMEDELTA_TO_WAIT_UNTIL_AGGREGATION_STARTS,
 )
 
@@ -44,12 +44,12 @@ class AggregatorController:
         return AggregationStartResults.DID_NOT_START
 
     def wait_until_aggregation_is_complete(self):
-        max_wait_time = datetime.now() + MAX_AGGREGATION_TIME
-        while datetime.now() < max_wait_time:
-            if self.__is_aggregator_idle:
-                return
-            sleep(AGGREGATION_FINISHED_CHECK_INTERVAL_SECONDS)
-        raise AggregationDidNotFinishInTime
+        aggregation_finished_within_time = wait_until_func_true(
+            lambda: self.__is_aggregator_idle,
+            MAX_AGGREGATION_TIME
+        )
+        if not aggregation_finished_within_time:
+            raise AggregationDidNotFinishInTime
 
     def __check_aggregation_started(self, now: datetime) -> bool:
         max_time_to_wait_until_aggregation_starts = \
