@@ -25,11 +25,14 @@ def main():
             try:
                 with box_listening_suspender:
                     match aggregator_controller.start_aggregation():
-                        case AggregationStartResults.STARTED \
-                             | AggregationStartResults.COMPLETED_QUICKLY:
+                        case AggregationStartResults.STARTED:
                             start_aggregation_request_communicator. \
                                 notify_aggregation_started_or_completed_successfully()
                             aggregator_controller.wait_until_aggregation_is_complete()
+                            continue
+                        case AggregationStartResults.COMPLETED_QUICKLY:
+                            start_aggregation_request_communicator. \
+                                notify_aggregation_started_or_completed_successfully()
                             continue
                         case AggregationStartResults.DID_NOT_START:
                             start_aggregation_request_communicator.notify_aggregation_failed()
