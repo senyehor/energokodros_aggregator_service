@@ -24,7 +24,7 @@ def main():
         if start_aggregation_request_communicator.check_start_aggregation_request_came():
             try:
                 with box_listening_suspender:
-                    match result := aggregator_controller.start_aggregation():
+                    match aggregator_controller.start_aggregation():
                         case AggregationStartResults.STARTED \
                              | AggregationStartResults.COMPLETED_QUICKLY:
                             start_aggregation_request_communicator. \
