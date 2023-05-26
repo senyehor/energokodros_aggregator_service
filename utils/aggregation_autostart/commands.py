@@ -1,0 +1,9 @@
+from settings import REDIS
+from start_aggregation_request_communicator.config import START_AGGREGATION_REQUEST_LISTENER_CONFIG
+from utils.redis.commands import SendRedisMessageToOneReceiverCommand
+
+start_aggregation = SendRedisMessageToOneReceiverCommand(
+    channel=START_AGGREGATION_REQUEST_LISTENER_CONFIG.aggregation_request_listen_channel,
+    message=START_AGGREGATION_REQUEST_LISTENER_CONFIG.start_aggregation_request_message,
+    r=REDIS
+)
