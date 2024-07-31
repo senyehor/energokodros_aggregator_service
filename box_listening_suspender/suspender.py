@@ -1,55 +1,20 @@
-from box_listening_suspender.box_listener_states import BoxListenerStates
-from box_listening_suspender.commands import resume_listening, stop_listening
-from box_listening_suspender.exceptions import (
-    BoxListeningWasNotResumed,
-    BoxListeningWasNotSuspended,
-)
-from utils.current_state_retreiver import (
-    RawCurrentStateRetriever, try_convert_raw_state_with_correct_exception,
-)
+from utils.commands import Command
 
 
-class BoxListeningSuspenderContexManager:
-    __state: BoxListenerStates
+class BoxListeningSuspender:
 
-    def __init__(self, box_listener_state_retriever: RawCurrentStateRetriever):
-        self.__state_retriever = box_listener_state_retriever
-        self.__update_current_state()
+    def __init__(self, stop_listening: Command, resume_listening: Command):
+        self.__stop_listening = stop_listening
+        self.__resume_listening = resume_listening
 
     def __stop_box_listening(self):
-        if self.__is_box_listening_running:
-            stop_listening.execute()
-        self.__update_current_state()
-        if self.__is_box_listening_suspended:
-            return
-        raise BoxListeningWasNotSuspended
+        self.__stop_listening.execute()
 
     def __resume_box_listening(self):
-        if self.__is_box_listening_suspended:
-            resume_listening.execute()
-        self.__update_current_state()
-        if self.__is_box_listening_running:
-            return
-        raise BoxListeningWasNotResumed
+        self.__resume_listening.execute()
 
     def __enter__(self):
         self.__stop_box_listening()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.__resume_box_listening()
-
-    def __update_current_state(self):
-        raw_current_state = self.__state_retriever.get_current_raw_state()
-        current_state = try_convert_raw_state_with_correct_exception(
-            raw_current_state,
-            BoxListenerStates
-        )
-        self.__state = current_state
-
-    @property
-    def __is_box_listening_running(self) -> bool:
-        return self.__state == BoxListenerStates.RUNNING
-
-    @property
-    def __is_box_listening_suspended(self) -> bool:
-        return self.__state == BoxListenerStates.SUSPENDED
