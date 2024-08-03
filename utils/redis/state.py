@@ -13,7 +13,8 @@ class StateReceiver:
         self.__get_state = get_state
 
     def get_state(self, state_maker: Callable[[str], Any]) -> StatesBase:
+        raw_state = self.__get_state.execute()
         try:
-            return state_maker(self.__get_state.execute())
+            return state_maker(raw_state)
         except ValueError as e:
-            raise InvalidRawState from e
+            raise InvalidRawState(raw_state) from e
