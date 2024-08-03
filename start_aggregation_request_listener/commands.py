@@ -6,12 +6,7 @@ from .config import START_AGGREGATION_REQUEST_LISTENER_CONFIG as _
 from .exceptions import ReceivedMessageIsNotCorrectStartAggregationRequest
 
 
-class StartAggregationRequestCheckerCommand(Command, ABC):
-    def execute(self, *args, **kwargs) -> bool:
-        pass
-
-
-class __StartAggregationRequestRedisCheckerCommand(StartAggregationRequestCheckerCommand):
+class __StartAggregationRequestRedisCheckerCommand(Command):
 
     def __init__(
             self, start_aggregation_request_message: str,
