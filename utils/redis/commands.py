@@ -35,6 +35,16 @@ class SendRedisMessageToOneReceiverCommand(SendRedisMessageCommand):
             raise InvalidReceiversCount(receiver_count, self._channel)
 
 
+class GetRedisValue(Command):
+    def __init__(self, value_key: str, r: Redis, command_name: str):
+        super().__init__(command_name)
+        self.__value_key = value_key
+        self.__r = r
+
+    def execute(self) -> str:
+        return self.__r.get(self.__value_key)
+
+
 class GetRedisMessageCommand(Command):
 
     def __init__(self, channel: ChannelT, r: Redis, *args, **kwargs):
