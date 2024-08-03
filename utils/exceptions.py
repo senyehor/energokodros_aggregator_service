@@ -4,11 +4,3 @@ class LogicException(Exception):
 
 class LogicExceptionWithMessage(LogicException):
     message: str
-
-
-class StateWasNotUpdated(LogicException):
-    pass
-
-
-class InvalidRawState(LogicException):
-    pass
