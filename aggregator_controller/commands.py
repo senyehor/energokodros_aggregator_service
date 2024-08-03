@@ -1,6 +1,8 @@
 from aggregator_controller.config import AGGREGATOR_CONTROLLER_CONFIG
 from settings import REDIS
-from utils.redis.commands import GetRedisMessageCommand, SendRedisMessageToOneReceiverCommand
+from utils.redis.commands import (
+    GetRedisValue, SendRedisMessageToOneReceiverCommand,
+)
 
 _ = AGGREGATOR_CONTROLLER_CONFIG
 
@@ -10,14 +12,9 @@ start_aggregation = SendRedisMessageToOneReceiverCommand(
     r=REDIS,
     command_name='start_aggregation'
 )
-update_aggregator_state = SendRedisMessageToOneReceiverCommand(
-    channel=_.channel_name,
-    message=_.update_state_message,
+
+get_aggregator_state = GetRedisValue(
+    value_key=_.aggregator_state_key,
     r=REDIS,
-    command_name='update_aggregator_state'
-)
-get_aggregator_state = GetRedisMessageCommand(
-    _.channels.listen_channel,
-    r=REDIS,
-    command_name='get_box_listener_state'
+    command_name='get_aggregator_state'
 )
