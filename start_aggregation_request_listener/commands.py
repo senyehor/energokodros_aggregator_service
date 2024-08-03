@@ -1,5 +1,3 @@
-from abc import ABC
-
 from settings import REDIS
 from utils.commands import Command
 from utils.redis.commands import GetRedisMessageCommand
@@ -36,10 +34,12 @@ class __StartAggregationRequestRedisCheckerCommand(StartAggregationRequestChecke
             raise ReceivedMessageIsNotCorrectStartAggregationRequest
 
 
+__get_start_aggregation_request_command = GetRedisMessageCommand(
+    _.listen_channel, REDIS, command_name='get_start_aggregation_command'
+)
+
 get_start_aggregation_request_message_from_redis = __StartAggregationRequestRedisCheckerCommand(
     start_aggregation_request_message=_.start_aggregation_request_message,
-    get_start_aggregation_command=GetRedisMessageCommand(
-        _.listen_channel, REDIS, command_name='get_start_aggregation_command'
-    ),
+    get_start_aggregation_request_command=__get_start_aggregation_request_command,
     command_name='get_start_aggregation_request_message_from_redis',
 )
