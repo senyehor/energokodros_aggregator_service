@@ -1,7 +1,7 @@
 from utils.commands import Command
 
 
-class BoxListeningSuspender:
+class BoxListenerController:
 
     def __init__(self, stop_listening: Command, resume_listening: Command):
         self.__stop_listening = stop_listening

@@ -1,8 +1,8 @@
-from box_listening_suspender.config import BOX_LISTENER_SUSPENDER_CONFIG
+from box_listening_controller.config import BOX_LISTENER_CONTROLLER_CONFIG
 from settings import REDIS
 from utils.redis.commands import SendRedisMessageToOneReceiverCommand
 
-_ = BOX_LISTENER_SUSPENDER_CONFIG
+_ = BOX_LISTENER_CONTROLLER_CONFIG
 
 stop_listening = SendRedisMessageToOneReceiverCommand(
     channel=_.channel_name,
