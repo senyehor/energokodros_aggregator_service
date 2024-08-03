@@ -42,7 +42,7 @@ class GetRedisValue(Command):
         self.__r = r
 
     def execute(self) -> str:
-        return self.__r.get(self.__value_key)
+        return self.__r.get(self.__value_key).decode()
 
 
 class GetRedisMessageCommand(Command):
