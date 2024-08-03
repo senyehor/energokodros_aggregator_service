@@ -1,0 +1,2 @@
+class AggregationAlreadyRunning(Exception):
+    pass
