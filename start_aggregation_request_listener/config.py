@@ -5,12 +5,12 @@ from utils.config_base import RedisChannelMixin
 
 
 @dataclass
-class _StartAggregationRequestListenerConfig(RedisChannelMixin):
+class __StartAggregationRequestListenerConfig(RedisChannelMixin):
     check_request_interval_seconds: int
     start_aggregation_request_message: str
 
 
-START_AGGREGATION_REQUEST_LISTENER_CONFIG = _StartAggregationRequestListenerConfig(
+START_AGGREGATION_REQUEST_LISTENER_CONFIG = __StartAggregationRequestListenerConfig(
     channel_name=os.getenv(
         'START_AGGREGATION_REQUEST_LISTENER.LISTEN_CHANNEL_NAME'
     ),
