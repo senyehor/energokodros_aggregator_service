@@ -7,14 +7,13 @@ from utils.exceptions import InvalidRawState
 StatesBase = StrEnum
 
 
-class StateRetriever:
+class StateReceiver:
 
-    def __init__(self, get_state: Command, state_maker: Callable[[str], Any]):
+    def __init__(self, get_state: Command):
         self.__get_state = get_state
-        self.__state_maker = state_maker
 
-    def get_state(self) -> StatesBase:
+    def get_state(self, state_maker: Callable[[str], Any]) -> StatesBase:
         try:
-            return self.__state_maker(self.__get_state.execute())
+            return state_maker(self.__get_state.execute())
         except ValueError as e:
             raise InvalidRawState from e
