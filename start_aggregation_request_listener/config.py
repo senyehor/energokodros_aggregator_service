@@ -12,14 +12,14 @@ class __StartAggregationRequestListenerConfig(RedisChannelMixin):
 
 START_AGGREGATION_REQUEST_LISTENER_CONFIG = __StartAggregationRequestListenerConfig(
     channel_name=os.getenv(
-        'START_AGGREGATION_REQUEST_LISTENER.LISTEN_CHANNEL_NAME'
+        'START_AGGREGATION_REQUEST_LISTENER_LISTEN_CHANNEL_NAME'
     ),
     start_aggregation_request_message=os.getenv(
-        'START_AGGREGATION_REQUEST_LISTENER.START_AGGREGATION_MESSAGE'
+        'START_AGGREGATION_REQUEST_LISTENER_START_AGGREGATION_MESSAGE'
     ),
     check_request_interval_seconds=int(
         os.getenv(
-            'START_AGGREGATION_REQUEST_LISTENER.CHECK_REQUEST_INTERVAL_SECONDS'
+            'START_AGGREGATION_REQUEST_LISTENER_CHECK_REQUEST_INTERVAL_SECONDS'
         )
     ),
 )
