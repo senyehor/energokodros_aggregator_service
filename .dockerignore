@@ -4,3 +4,5 @@ __pycache__/
 *$py.class
 tmp.*
 poetry.lock
+Dockerfile
+env_template
