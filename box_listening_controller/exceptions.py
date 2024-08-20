@@ -5,7 +5,15 @@ class BoxListenerAlreadyStopped(LogicException):
     ...
 
 
+class BoxListenerDidNotStop(LogicException):
+    ...
+
+
 class BoxListenerAlreadyRunning(LogicException):
+    ...
+
+
+class BoxListenerDidNotResume(LogicException):
     ...
 
 
