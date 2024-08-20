@@ -15,3 +15,7 @@ get_aggregator_state = GetRedisValue(
     value_key=_.aggregator_state_key,
     r=REDIS
 )
+get_aggregation_last_time_run = GetRedisValue(
+    value_key=_.aggregation_last_time_run_key,
+    r=REDIS
+)
