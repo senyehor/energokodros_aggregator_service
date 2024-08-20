@@ -36,8 +36,7 @@ class SendRedisMessageToOneReceiverCommand(SendRedisMessageCommand):
 
 
 class GetRedisValue(Command):
-    def __init__(self, value_key: str, r: Redis, command_name: str):
-        super().__init__(command_name)
+    def __init__(self, value_key: str, r: Redis):
         self.__value_key = value_key
         self.__r = r
 
