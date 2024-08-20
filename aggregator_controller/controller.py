@@ -30,4 +30,4 @@ class AggregatorController:
 
     def __update_aggregator_state(self):
         # noinspection PyTypeChecker
-        self.__aggregator_state = self.__aggregator_state_receiver.get_state(AggregatorStates)
+        self.__aggregator_state = self.__aggregator_state_receiver.get_state()
