@@ -9,6 +9,7 @@ class __StartAggregationRequestListenerConfig:
     aggregation_request_listen_channel: str
     aggregation_start_result_send_channel: str
     aggregation_started_or_completed_successfully_message: str
+    aggregation_failed_to_start_message: str
 
 
 START_AGGREGATION_REQUEST_LISTENER_CONFIG = __StartAggregationRequestListenerConfig(
@@ -20,6 +21,9 @@ START_AGGREGATION_REQUEST_LISTENER_CONFIG = __StartAggregationRequestListenerCon
     ),
     aggregation_started_or_completed_successfully_message=os.getenv(
         'AGGREGATION_STARTED_OR_COMPLETED_SUCCESSFULLY_MESSAGE'
+    ),
+    aggregation_failed_to_start_message=os.getenv(
+        'AGGREGATION_FAILED_TO_START'
     ),
     start_aggregation_request_message=os.getenv(
         'START_AGGREGATION_REQUEST_LISTENER_START_AGGREGATION_MESSAGE'
