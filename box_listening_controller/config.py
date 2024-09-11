@@ -4,7 +4,7 @@ from datetime import timedelta
 
 from utils.config_base import RedisChannelMixin
 
-AGGREGATION_LAST_TIME_RUN_FORMAT = '%Y-%m-%dT%H:%M:%S.%f%z'
+AGGREGATION_LAST_TIME_RUN_FORMAT = '%Y-%m-%d %H:%M:%S %z'
 TIMEDELTA_TO_CHECK_WHETHER_AGGREGATION_WAS_RUN_TOO_FAST = timedelta(seconds=5)
 BOX_LISTENER_CHANGE_STATE_DELAY_SECONDS = 6
 
