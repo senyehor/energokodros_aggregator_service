@@ -14,7 +14,7 @@ class __AggregatorControllerConfig(RedisChannelMixin):
 
 AGGREGATOR_CONTROLLER_CONFIG = __AggregatorControllerConfig(
     channel_name=os.getenv(
-        'AGGREGATOR_CONTROLLER_CONFIG_CHANNEL_NAME'
+        'AGGREGATOR_CHANNEL'
     ),
     start_aggregation_message=os.getenv(
         'AGGREGATOR_CONTROLLER_CONFIG_START_AGGREGATION_MESSAGE'
