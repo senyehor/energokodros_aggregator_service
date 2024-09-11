@@ -10,6 +10,7 @@ packages = [{include = "aggregation_controller"}]
 python = "^3.10"
 redis = "^4.5.1"
 python-dotenv = "^0.21.1"
+apscheduler = "^3.10.1"
 
 
 [build-system]
